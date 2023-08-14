@@ -10,6 +10,12 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+        pathname: "/**/*",
+        port: "",
+      },
+      {
+        protocol: "https",
         hostname: "i1.sndcdn.com",
         pathname: "/*",
         port: "",

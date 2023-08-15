@@ -14,6 +14,16 @@ const handler = NextAuth({
   pages: {
     signIn: "/auth/signin",
   },
+  callbacks: {
+    async session({ session, token }) {
+      session.user.username = session.user?.name
+        ?.split(" ")
+        .join("")
+        .toLocaleLowerCase() as string;
+      session.user.uid = token.sub as string;
+      return session;
+    },
+  },
 });
 
 export { handler as GET, handler as POST };

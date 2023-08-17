@@ -4,7 +4,7 @@ import GoogleProvider from "next-auth/providers/google";
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID as string;
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET as string;
 
-const handler = NextAuth({
+export const authOptions = {
   providers: [
     GoogleProvider({
       clientId: GOOGLE_CLIENT_ID,
@@ -14,6 +14,9 @@ const handler = NextAuth({
   pages: {
     signIn: "/auth/signin",
   },
+};
+const handler = NextAuth({
+  ...authOptions,
   callbacks: {
     async session({ session, token }) {
       session.user.username = session.user?.name

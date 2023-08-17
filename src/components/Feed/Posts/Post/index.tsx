@@ -1,18 +1,31 @@
+import { useSession } from "next-auth/react";
+import React, { useState } from "react";
+import UploadComment from "@/lib/UploadComment";
 import Image from "next/image";
-import { UploadedPost } from "@/types";
+import { RetrievedPost } from "@/types";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsChatDots, BsBookmark } from "react-icons/bs";
 import { HiOutlineEmojiHappy } from "react-icons/hi";
 
-export default function Post({
-  userName,
-  userImg,
-  postImg,
-  caption,
-}: UploadedPost) {
+type Props = {
+  children: React.ReactNode;
+} & RetrievedPost;
+
+const Post = ({ children, id, userName, userImg, postImg, caption }: Props) => {
+  const { data: session } = useSession();
+  const [comment, setComment] = useState<string>("");
+
+  const sendComment = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const enteredComment = comment;
+    setComment("");
+    UploadComment({ id, userName, userImg, comment: enteredComment });
+  };
+
   return (
     <article className="bg-white mb-7 border rounded-md">
+      {/* Post header */}
       <header className="flex items-center p-5">
         <Image
           src={userImg}
@@ -25,7 +38,8 @@ export default function Post({
         <p className="font-bold flex-1">{userName}</p>
         <BiDotsHorizontalRounded className="h-8 text-2xl" />
       </header>
-      <div className="w-full relative h-[800px] mb-4">
+      {/* Post image */}
+      <div className="w-full relative h-[300px] lg:h-[600px] mb-4">
         <Image
           src={postImg}
           alt={caption}
@@ -36,13 +50,17 @@ export default function Post({
           className="object-cover object-center"
         />
       </div>
-      <div className="flex justify-between items-center px-4 mb-4">
-        <div className="flex items-center space-x-4">
-          <AiOutlineHeart className="user-action" />
-          <BsChatDots className="user-action" />
+      {/* Post buttons */}
+      {session && (
+        <div className="flex justify-between items-center px-4 mb-4">
+          <div className="flex items-center space-x-4">
+            <AiOutlineHeart className="user-action" />
+            <BsChatDots className="user-action" />
+          </div>
+          <BsBookmark className="user-action" />
         </div>
-        <BsBookmark className="user-action" />
-      </div>
+      )}
+      {/* Post caption */}
       <div className="flex space-x-2 items-center px-4 mb-4">
         <address className="not-italic indent-1">
           <a rel="author" className="font-bold cursor-default">
@@ -51,17 +69,30 @@ export default function Post({
         </address>
         <p className="truncate">{caption}</p>
       </div>
-      <form className="flex items-center p-4">
-        <HiOutlineEmojiHappy className="text-2xl" />
-        <input
-          type="text"
-          placeholder="Enter your comment"
-          className="flex-1 border-none focus:outline-none indent-2"
-        />
-        <button type="submit" className="text-blue-400 font-bold">
-          Post
-        </button>
-      </form>
+      {/* Post comments  */}
+      {children}
+      {/* Post comment form */}
+      {session && (
+        <form onSubmit={sendComment} className="flex items-center p-4">
+          <HiOutlineEmojiHappy className="text-2xl" />
+          <input
+            type="text"
+            placeholder="Enter your comment"
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+            className="flex-1 border-none focus:outline-none indent-2"
+          />
+          <button
+            type="submit"
+            disabled={!comment.trim()}
+            className="text-blue-400 font-bold disabled:text-blue-200"
+          >
+            Post
+          </button>
+        </form>
+      )}
     </article>
   );
-}
+};
+
+export default Post;

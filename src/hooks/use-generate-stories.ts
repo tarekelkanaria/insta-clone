@@ -1,4 +1,5 @@
 "use client";
+
 import { array, username, jobTitle, nanoId } from "minifaker";
 import "minifaker/locales/en";
 import { useState, useEffect, useMemo } from "react";

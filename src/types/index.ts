@@ -1,4 +1,4 @@
-import type { FieldValue } from "firebase/firestore";
+import type { Timestamp } from "firebase/firestore";
 export interface ProfileStory {
   id: string;
   profileName: string;
@@ -15,7 +15,16 @@ export interface UploadedPost {
   postImg: string;
 }
 
-export interface RetreivedPost extends UploadedPost {
+export interface UploadedComment {
+  userName: string;
+  userImg: string;
+  comment: string;
+}
+export interface RetrievedPost extends UploadedPost {
   id: string;
-  timestamp: FieldValue;
+  timestamp: Timestamp;
+}
+export interface RetrievedComment extends UploadedComment {
+  id: string;
+  timestamp: Timestamp;
 }

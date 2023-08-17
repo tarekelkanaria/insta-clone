@@ -5,11 +5,11 @@ import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import { closing } from "@/redux/features/modalSlice";
 // Hooks
 import { useSession } from "next-auth/react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+// Server actions
+import UploadPost from "@/lib/UploadPost";
 // Types
 import { UploadedPost } from "@/types";
-// Components
-import UploadPost from "./UploadPost";
 // UI components
 import Modal from "react-modal";
 import ClipLoader from "react-spinners/ClipLoader";
@@ -25,7 +25,9 @@ const UploadModal = () => {
   const imagePickerRef = useRef<HTMLInputElement>(null);
   const captionRef = useRef<HTMLInputElement>(null);
 
-  Modal.setAppElement("#upload-modal");
+  useEffect(() => {
+    Modal.setAppElement("#upload-modal");
+  }, []);
 
   const addImageToModal = (e: React.ChangeEvent<HTMLInputElement>) => {
     const reader = new FileReader();

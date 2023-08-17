@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { UserPost } from "@/types";
+import { UploadedPost } from "@/types";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsChatDots, BsBookmark } from "react-icons/bs";
@@ -10,7 +10,7 @@ export default function Post({
   userImg,
   postImg,
   caption,
-}: UserPost) {
+}: UploadedPost) {
   return (
     <article className="bg-white mb-7 border rounded-md">
       <header className="flex items-center p-5">
@@ -25,7 +25,7 @@ export default function Post({
         <p className="font-bold flex-1">{userName}</p>
         <BiDotsHorizontalRounded className="h-8 text-2xl" />
       </header>
-      <div className="w-full relative min-h-[200px] h-[600px] mb-4">
+      <div className="w-full relative h-[800px] mb-4">
         <Image
           src={postImg}
           alt={caption}

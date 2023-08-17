@@ -15,9 +15,12 @@ const modalSlice = createSlice({
     opening: (state) => {
       state.isVisible = true;
     },
+    closing: (state) => {
+      state.isVisible = false;
+    },
   },
 });
 
-export const { opening } = modalSlice.actions;
+export const { opening, closing } = modalSlice.actions;
 
 export default modalSlice.reducer;

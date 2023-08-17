@@ -1,15 +1,21 @@
+import type { FieldValue } from "firebase/firestore";
 export interface ProfileStory {
   id: string;
   profileName: string;
   profileImg: string;
 }
+
 export interface ProfileSuggestion extends ProfileStory {
   profileJob: string;
 }
-export interface UserPost {
-  id: string;
+export interface UploadedPost {
   userName: string;
   userImg: string;
-  postImg: string;
   caption: string;
+  postImg: string;
+}
+
+export interface RetreivedPost extends UploadedPost {
+  id: string;
+  timestamp: FieldValue;
 }

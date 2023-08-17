@@ -1,13 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  experimental: {
+    serverActions: true,
+    serverActionsBodySizeLimit: "5mb",
+  },
   images: {
     remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "upload.wikimedia.org",
-        port: "",
-        pathname: "/wikipedia/commons/thumb/**/**",
-      },
       {
         protocol: "https",
         hostname: "lh3.googleusercontent.com",
@@ -16,19 +14,19 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "i1.sndcdn.com",
-        pathname: "/*",
+        hostname: "firebasestorage.googleapis.com",
+        pathname: "/v0/b/**/**/*",
         port: "",
+      },
+      {
+        protocol: "https",
+        hostname: "upload.wikimedia.org",
+        port: "",
+        pathname: "/wikipedia/commons/thumb/**/**",
       },
       {
         protocol: "https",
         hostname: "i.pravatar.cc",
-        pathname: "/*",
-        port: "",
-      },
-      {
-        protocol: "https",
-        hostname: "images.unsplash.com",
         pathname: "/*",
         port: "",
       },

@@ -1,7 +1,7 @@
 "use client";
 
 import { db } from "@/lib/firebase";
-import { RetrievedComment, RetrievedPost } from "@/types";
+import { RetrievedComment, RetrievedLike, RetrievedPost } from "@/types";
 import {
   onSnapshot,
   collection,
@@ -13,12 +13,13 @@ import { useEffect, useState } from "react";
 
 const useRetrieveData = (collectionName: string, id?: string) => {
   const [retrievedData, setRetrievedData] = useState<
-    RetrievedPost[] | RetrievedComment[]
+    RetrievedPost[] | RetrievedComment[] | RetrievedLike[]
   >([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     let unsubscribe!: Unsubscribe;
-    let data: RetrievedComment[] | RetrievedPost[] = [];
+    let data: RetrievedComment[] | RetrievedPost[] | RetrievedLike[] = [];
 
     if (collectionName === "posts" && !id) {
       unsubscribe = onSnapshot(
@@ -27,7 +28,7 @@ const useRetrieveData = (collectionName: string, id?: string) => {
           data = snapshot?.docs.map((doc) => ({
             id: doc.id,
             ...doc.data(),
-          })) as RetrievedPost[] | RetrievedComment[];
+          })) as RetrievedPost[];
           setRetrievedData(data);
         }
       );
@@ -41,16 +42,28 @@ const useRetrieveData = (collectionName: string, id?: string) => {
           data = snapshot?.docs.map((doc) => ({
             id: doc.id,
             ...doc.data(),
-          })) as RetrievedPost[] | RetrievedComment[];
+          })) as RetrievedComment[];
+          setRetrievedData(data);
+        }
+      );
+    } else if (collectionName === "likes" && id) {
+      unsubscribe = onSnapshot(
+        collection(db, "posts", id as string, "likes"),
+        (snapshot) => {
+          data = snapshot?.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          })) as RetrievedLike[];
           setRetrievedData(data);
         }
       );
     }
 
+    setLoading(false);
     return unsubscribe;
   }, [db, id, collectionName]);
 
-  return { retrievedData };
+  return { retrievedData, loading };
 };
 
 export default useRetrieveData;

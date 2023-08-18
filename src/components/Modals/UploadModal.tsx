@@ -2,7 +2,7 @@
 
 // Redux state
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
-import { closing } from "@/redux/features/modalSlice";
+import { closing } from "@/redux/features/uploadModalSlice";
 // Hooks
 import { useSession } from "next-auth/react";
 import { useEffect, useRef, useState } from "react";
@@ -17,7 +17,7 @@ import { FaCamera } from "react-icons/fa";
 import { GrClose } from "react-icons/gr";
 
 const UploadModal = () => {
-  const isModalOpened = useAppSelector((state) => state.modal.isVisible);
+  const isModalOpened = useAppSelector((state) => state.uploadModal.isVisible);
   const dispatch = useAppDispatch();
   const { data: session } = useSession();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -26,7 +26,7 @@ const UploadModal = () => {
   const captionRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    Modal.setAppElement("#upload-modal");
+    Modal.setAppElement("#modals");
   }, []);
 
   const addImageToModal = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,10 +61,10 @@ const UploadModal = () => {
   };
 
   return (
-    <div id="upload-modal">
+    <>
       {isModalOpened && (
         <Modal
-          className="max-w-lg w-[90%] p-6 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white border-2 rounded-md focus:outline-none shadow-md"
+          className="modal"
           isOpen={isModalOpened}
           onRequestClose={() => {
             dispatch(closing());
@@ -82,7 +82,7 @@ const UploadModal = () => {
                   if (selectedImage) setSelectedImage(null);
                   else dispatch(closing());
                 }}
-                className="h-8 w-fit cursor-pointer"
+                className="h-8 w-fit cursor-pointer mb-2"
               />
             </div>
             {selectedImage ? (
@@ -122,7 +122,7 @@ const UploadModal = () => {
           </form>
         </Modal>
       )}
-    </div>
+    </>
   );
 };
 

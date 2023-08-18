@@ -14,8 +14,6 @@ export default function Story({ profileName, profileImg, isUser }: Props) {
         src={profileImg}
         width={56}
         height={56}
-        placeholder="blur"
-        blurDataURL={profileImg}
         style={{ width: "auto" }}
         className="rounded-full p-[1.5px] border-2 border-red-500 group-hover:scale-110 transition-transform duration-200"
       />

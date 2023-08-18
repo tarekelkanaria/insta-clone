@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Header from "@/components/Header";
 import Providers from "@/providers";
+import Header from "@/components/Header";
+import MainContainer from "@/components/UI/MainContainer";
+import Modals from "@/components/Modals";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -24,7 +26,8 @@ export default function RootLayout({
           <header className="shadow border-b bg-white sticky top-0 z-10 mb-8">
             <Header />
           </header>
-          {children}
+          <MainContainer>{children}</MainContainer>
+          <Modals />
         </Providers>
       </body>
     </html>

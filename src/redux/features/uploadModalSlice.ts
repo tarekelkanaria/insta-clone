@@ -1,15 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-type ModalState = {
+type UploadModal = {
   isVisible: boolean;
 };
 
-const initialState: ModalState = {
+const initialState: UploadModal = {
   isVisible: false,
 };
 
-const modalSlice = createSlice({
-  name: "modal",
+const uploadModalSlice = createSlice({
+  name: "upload-modal",
   initialState,
   reducers: {
     opening: (state) => {
@@ -21,6 +21,6 @@ const modalSlice = createSlice({
   },
 });
 
-export const { opening, closing } = modalSlice.actions;
+export const { opening, closing } = uploadModalSlice.actions;
 
-export default modalSlice.reducer;
+export default uploadModalSlice.reducer;

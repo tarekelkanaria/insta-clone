@@ -2,7 +2,7 @@
 
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useAppDispatch } from "@/redux/hooks";
-import { opening } from "@/redux/features/modalSlice";
+import { opening } from "@/redux/features/uploadModalSlice";
 import Image from "next/image";
 import Link from "next/link";
 import { AiFillHome } from "react-icons/ai";
@@ -24,7 +24,7 @@ const Menu = () => {
             className="text-2xl cursor-pointer hover:scale-125 transition-transform duration-200"
           />
           <Image
-            alt="User profile image"
+            alt={session?.user.username}
             src={session.user?.image as string}
             width={40}
             height={40}

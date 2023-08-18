@@ -1,10 +1,14 @@
-import { useSession } from "next-auth/react";
-import React, { useState } from "react";
 import UploadComment from "@/lib/UploadComment";
+import ToggleLike from "@/lib/ToggleLike";
+import useRetrieveData from "@/hooks/use-retrieve-data";
+import { useAppDispatch } from "@/redux/hooks";
+import { opening, saveLikedUsers } from "@/redux/features/likesModalSlice";
+import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import { RetrievedPost } from "@/types";
+import { RetrievedLike, RetrievedPost } from "@/types";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { BsChatDots, BsBookmark } from "react-icons/bs";
 import { HiOutlineEmojiHappy } from "react-icons/hi";
 
@@ -15,12 +19,37 @@ type Props = {
 const Post = ({ children, id, userName, userImg, postImg, caption }: Props) => {
   const { data: session } = useSession();
   const [comment, setComment] = useState<string>("");
+  const [hasLiked, setHasLiked] = useState<boolean>(false);
+  const { retrievedData: likes } = useRetrieveData("likes", id) as {
+    retrievedData: RetrievedLike[];
+  };
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const likeIndex = likes.findIndex((like) => like.id === session?.user.uid);
+    setHasLiked(likeIndex !== -1);
+  }, [likes]);
+
+  const likeAction = () => {
+    ToggleLike({
+      id,
+      hasLiked,
+      userName: session!.user.username,
+      userImg: session?.user.image as string,
+      userId: session!.user.uid,
+    });
+  };
 
   const sendComment = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const enteredComment = comment;
     setComment("");
     UploadComment({ id, userName, userImg, comment: enteredComment });
+  };
+
+  const showLikes = () => {
+    dispatch(saveLikedUsers(likes));
+    dispatch(opening());
   };
 
   return (
@@ -54,10 +83,30 @@ const Post = ({ children, id, userName, userImg, postImg, caption }: Props) => {
       {session && (
         <div className="flex justify-between items-center px-4 mb-4">
           <div className="flex items-center space-x-4">
-            <AiOutlineHeart className="user-action" />
+            {hasLiked ? (
+              <AiFillHeart
+                onClick={likeAction}
+                className="user-action text-red-500"
+              />
+            ) : (
+              <AiOutlineHeart onClick={likeAction} className="user-action" />
+            )}
             <BsChatDots className="user-action" />
           </div>
           <BsBookmark className="user-action" />
+        </div>
+      )}
+      {/* Post likes */}
+      {likes.length > 0 && (
+        <div className="mb-1 px-4">
+          <button
+            type="button"
+            disabled={!session}
+            onClick={showLikes}
+            className="font-bold hover:underline focus:outline-none disabled:hover:no-underline disabled:cursor-not-allowed"
+          >
+            {likes.length} likes
+          </button>
         </div>
       )}
       {/* Post caption */}

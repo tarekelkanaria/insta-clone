@@ -20,6 +20,11 @@ export interface UploadedComment {
   userImg: string;
   comment: string;
 }
+export interface UploadedLike {
+  userName: string;
+  userImg: string;
+  userId: string;
+}
 export interface RetrievedPost extends UploadedPost {
   id: string;
   timestamp: Timestamp;
@@ -27,4 +32,10 @@ export interface RetrievedPost extends UploadedPost {
 export interface RetrievedComment extends UploadedComment {
   id: string;
   timestamp: Timestamp;
+}
+
+export interface RetrievedLike {
+  id: string;
+  userName: string;
+  userImg: string;
 }

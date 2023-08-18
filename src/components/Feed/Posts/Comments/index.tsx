@@ -13,7 +13,7 @@ const Comments = ({ id }: Props) => {
   };
 
   return (
-    <section className="mx-4 max-h-24 overflow-y-auto scrollbar-none sm:hover:scrollbar sm:scrollbar-w-2 sm:scrollbar-track-slate-100 sm:scrollbar-thumb-gray-400 sm:scrollbar-thumb-rounded-full">
+    <section className="mx-4 max-h-24 overflow-y-auto sm:scrollbar-w-2 scroll-parent">
       {comments.length > 0 &&
         comments.map((comment) => (
           <article key={comment.id}>

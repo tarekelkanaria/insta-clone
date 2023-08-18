@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import { nanoId } from "minifaker";
 import { ProfileStory } from "@/types";
 import Story from "./Story";
-import StoriesPlaceholders from "./StoriesPlaceholders";
+import StoriesPlaceholders from "@/components/UI/LoadingPlaceholders/StoriesPlaceholders";
 
 const Stories = () => {
   const { data: session } = useSession();
@@ -15,7 +15,7 @@ const Stories = () => {
   };
 
   return (
-    <section className="lg:col-span-2 mx-2 lg:mx-0 flex space-x-2 bg-white border border-gray-200 rounded-sm p-6 mb-8 overflow-x-auto scrollbar-none sm:hover:scrollbar sm:scrollbar-h-2.5 sm:scrollbar-track-slate-100 sm:scrollbar-thumb-gray-400 sm:scrollbar-thumb-rounded-full">
+    <section className="lg:col-span-2 mx-2 lg:mx-0 flex space-x-2 bg-white border border-gray-200 rounded-sm p-6 mb-8 overflow-x-auto sm:scrollbar-h-2.5 scroll-parent">
       {loading && <StoriesPlaceholders />}
       {session && (
         <Story

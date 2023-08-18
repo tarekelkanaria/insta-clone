@@ -6,4 +6,10 @@
   .user-action {
     @apply text-2xl hover:scale-125 transition-transform duration-200 cursor-pointer;
   }
+  .scroll-parent {
+    @apply scrollbar-none sm:hover:scrollbar sm:scrollbar-track-slate-100 sm:scrollbar-thumb-gray-400 sm:scrollbar-thumb-rounded-full;
+  }
+  .modal {
+    @apply max-w-lg w-[90%] p-6 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white border-2 rounded-md focus:outline-none shadow-md;
+  }
 }

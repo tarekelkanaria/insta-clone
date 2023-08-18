@@ -1,8 +1,7 @@
-"use client";
 import useGenerateProfiles from "@/hooks/use-generate-stories";
-import { ProfileSuggestion } from "@/types";
 import Image from "next/image";
-import SuggestionsPlaceholder from "./SuggestionsPlaceholder";
+import { ProfileSuggestion } from "@/types";
+import SuggestionsPlaceholder from "@/components/UI/LoadingPlaceholders/SuggestionsPlaceholder";
 
 const SuggestionsList = () => {
   const { profiles, loading } = useGenerateProfiles(5, true) as {
@@ -24,8 +23,6 @@ const SuggestionsList = () => {
             height={40}
             width={40}
             style={{ width: "auto" }}
-            placeholder="blur"
-            blurDataURL={profile.profileImg}
             className="rounded-full border p-0.5"
           />
           <div className="flex-1 ml-4">

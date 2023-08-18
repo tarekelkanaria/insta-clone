@@ -1,10 +1,8 @@
-"use server";
-
-import { UploadedLike } from "@/types";
 import { deleteDoc, doc, setDoc } from "firebase/firestore";
-import { db } from "./firebase";
+import { db } from ".";
+import { UploadedLike } from "@/types";
 
-export default async function ToggleLike({
+export default async function toggleLike({
   id,
   hasLiked,
   userName,

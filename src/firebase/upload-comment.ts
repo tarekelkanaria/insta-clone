@@ -1,10 +1,8 @@
-"use server";
-
-import { db } from "./firebase";
-import { UploadedComment } from "@/types";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { db } from ".";
+import { UploadedComment } from "@/types";
 
-export default async function UploadComment({
+export default async function uploadComment({
   id,
   userName,
   userImg,

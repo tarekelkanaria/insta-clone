@@ -1,6 +1,6 @@
 "use client";
 
-import { db } from "@/lib/firebase";
+import { db } from "@/firebase";
 import { RetrievedComment, RetrievedLike, RetrievedPost } from "@/types";
 import {
   onSnapshot,

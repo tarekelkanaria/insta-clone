@@ -1,7 +1,7 @@
 import useGenerateProfiles from "@/hooks/use-generate-stories";
 import Image from "next/image";
 import { ProfileSuggestion } from "@/types";
-import SuggestionsPlaceholder from "@/components/UI/LoadingPlaceholders/SuggestionsPlaceholder";
+import SuggestionsPlaceholders from "@/components/UI/LoadingPlaceholders/SuggestionsPlaceholders";
 
 const SuggestionsList = () => {
   const { profiles, loading } = useGenerateProfiles(5, true) as {
@@ -11,7 +11,7 @@ const SuggestionsList = () => {
 
   return (
     <>
-      {loading && <SuggestionsPlaceholder />}
+      {loading && <SuggestionsPlaceholders />}
       {profiles.map((profile) => (
         <div
           key={profile.id}

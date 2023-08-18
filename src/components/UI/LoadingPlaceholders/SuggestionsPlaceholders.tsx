@@ -1,4 +1,4 @@
-export default function SuggestionsPlaceholder() {
+export default function SuggestionsPlaceholders() {
   return (
     <div className="animate-pulse">
       <div className="flex justify-between items-center mb-3">

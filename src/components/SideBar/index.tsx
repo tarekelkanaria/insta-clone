@@ -3,13 +3,15 @@
 import { useSession } from "next-auth/react";
 import MiniProfile from "./MiniProfile";
 import Suggestions from "./Suggestions";
+import SideBarPlaceholders from "../UI/LoadingPlaceholders/SideBarPlaceholders";
 
 const SideBar = () => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   return (
     <>
-      {session && (
+      {status === "loading" && <SideBarPlaceholders />}
+      {status === "authenticated" && (
         <section className="fixed w-80 xl:w-[380px]">
           <MiniProfile
             image={session?.user.image as string}

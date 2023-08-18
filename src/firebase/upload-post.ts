@@ -1,6 +1,3 @@
-"use server";
-
-import { db, storage } from "./firebase";
 import {
   addDoc,
   collection,
@@ -8,10 +5,11 @@ import {
   serverTimestamp,
   updateDoc,
 } from "firebase/firestore";
-import { UploadedPost } from "@/types";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
+import { db, storage } from ".";
+import { UploadedPost } from "@/types";
 
-export default async function UploadPost({
+export default async function uploadPost({
   userName,
   userImg,
   caption,

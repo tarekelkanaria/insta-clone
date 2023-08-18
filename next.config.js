@@ -1,9 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    serverActions: true,
-    serverActionsBodySizeLimit: "5mb",
-  },
   images: {
     remotePatterns: [
       {
@@ -21,8 +17,8 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "upload.wikimedia.org",
-        port: "",
         pathname: "/wikipedia/commons/thumb/**/**",
+        port: "",
       },
       {
         protocol: "https",

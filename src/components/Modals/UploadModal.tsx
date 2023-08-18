@@ -7,7 +7,7 @@ import { closing } from "@/redux/features/uploadModalSlice";
 import { useSession } from "next-auth/react";
 import { useEffect, useRef, useState } from "react";
 // Server actions
-import UploadPost from "@/lib/UploadPost";
+import uploadPost from "@/firebase/upload-post";
 // Types
 import { UploadedPost } from "@/types";
 // UI components
@@ -53,7 +53,7 @@ const UploadModal = () => {
       postImg: selectedImage as string,
     };
 
-    await UploadPost(newPost).then(() => {
+    await uploadPost(newPost).then(() => {
       dispatch(closing());
       setPending(false);
       setSelectedImage(null);

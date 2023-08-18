@@ -1,5 +1,5 @@
-import UploadComment from "@/lib/UploadComment";
-import ToggleLike from "@/lib/ToggleLike";
+import uploadComment from "@/firebase/upload-comment";
+import toggleLike from "@/firebase/toggle-like";
 import useRetrieveData from "@/hooks/use-retrieve-data";
 import { useAppDispatch } from "@/redux/hooks";
 import { opening, saveLikedUsers } from "@/redux/features/likesModalSlice";
@@ -31,7 +31,7 @@ const Post = ({ children, id, userName, userImg, postImg, caption }: Props) => {
   }, [likes]);
 
   const likeAction = () => {
-    ToggleLike({
+    toggleLike({
       id,
       hasLiked,
       userName: session!.user.username,
@@ -44,7 +44,7 @@ const Post = ({ children, id, userName, userImg, postImg, caption }: Props) => {
     e.preventDefault();
     const enteredComment = comment;
     setComment("");
-    UploadComment({ id, userName, userImg, comment: enteredComment });
+    uploadComment({ id, userName, userImg, comment: enteredComment });
   };
 
   const showLikes = () => {

@@ -1,8 +1,8 @@
 "use client";
 
-import { useSession, signIn, signOut } from "next-auth/react";
 import { useAppDispatch } from "@/redux/hooks";
 import { opening } from "@/redux/features/uploadModalSlice";
+import { useSession, signIn, signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { AiFillHome } from "react-icons/ai";
@@ -26,9 +26,10 @@ const Menu = () => {
           <Image
             alt={session?.user.username}
             src={session.user?.image as string}
+            priority={true}
             width={40}
             height={40}
-            className="rounded-full cursor-pointer"
+            className="rounded-full cursor-pointer object-contain"
             onClick={() => signOut()}
           />
         </>

@@ -11,11 +11,12 @@ export default function MiniProfile({ image, username }: Props) {
     <article className="flex items-center justify-between ml-5 mb-4">
       <Image
         src={image}
-        alt="User Profile Image"
+        alt={username}
         height={64}
         width={64}
+        priority={true}
         style={{ width: "auto" }}
-        className="rounded-full border p-0.5"
+        className="rounded-full border p-0.5 object-contain"
       />
       <div className="flex-1 ml-4">
         <h2 className="font-bold whitespace-nowrap">{username}</h2>

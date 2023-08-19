@@ -23,7 +23,7 @@ const SuggestionsList = () => {
             height={40}
             width={40}
             style={{ width: "auto" }}
-            className="rounded-full border p-0.5"
+            className="rounded-full border p-0.5 object-contain"
           />
           <div className="flex-1 ml-4">
             <h2 className="text-sm font-semibold">{profile.profileName}</h2>

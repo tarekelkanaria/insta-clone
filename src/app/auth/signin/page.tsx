@@ -1,6 +1,6 @@
-import SignInButton from "@/components/UI/SignInButton";
 import { getProviders } from "next-auth/react";
 import Image from "next/image";
+import SignInButton from "@/components/UI/SignInButton";
 
 export default async function signin() {
   const providers = await getProviders();

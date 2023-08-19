@@ -3,6 +3,8 @@
 // Redux state
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import { closing } from "@/redux/features/uploadModalSlice";
+import { setPostsCount } from "@/redux/features/postsSlice";
+
 // Hooks
 import { useSession } from "next-auth/react";
 import { useEffect, useRef, useState } from "react";
@@ -53,7 +55,8 @@ const UploadModal = () => {
       postImg: selectedImage as string,
     };
 
-    await uploadPost(newPost).then(() => {
+    await uploadPost(newPost).then((res) => {
+      dispatch(setPostsCount(res));
       dispatch(closing());
       setPending(false);
       setSelectedImage(null);

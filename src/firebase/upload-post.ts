@@ -2,12 +2,19 @@ import {
   addDoc,
   collection,
   doc,
+  getCountFromServer,
   serverTimestamp,
   updateDoc,
 } from "firebase/firestore";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import { db, storage } from ".";
 import { UploadedPost } from "@/types";
+
+export const getAllPosts = async () => {
+  const snapshot = await getCountFromServer(collection(db, "posts"));
+  const postsCount = snapshot.data().count;
+  return postsCount;
+};
 
 export default async function uploadPost({
   userName,
@@ -31,4 +38,5 @@ export default async function uploadPost({
       postImg: downloadUrl,
     });
   });
+  return await getAllPosts();
 }

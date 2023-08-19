@@ -33,7 +33,6 @@ export interface RetrievedComment extends UploadedComment {
   id: string;
   timestamp: Timestamp;
 }
-
 export interface RetrievedLike {
   id: string;
   userName: string;

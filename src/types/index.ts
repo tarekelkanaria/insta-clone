@@ -1,12 +1,5 @@
 import type { Timestamp } from "firebase/firestore";
 
-export interface User {
-  name: string;
-  email: string;
-  image: string;
-  username: string;
-  uid: string;
-}
 export interface ProfileStory {
   id: string;
   profileName: string;
@@ -16,6 +9,7 @@ export interface ProfileStory {
 export interface ProfileSuggestion extends ProfileStory {
   profileJob: string;
 }
+
 export interface UploadedPost {
   userName: string;
   userImg: string;
@@ -28,19 +22,23 @@ export interface UploadedComment {
   userImg: string;
   comment: string;
 }
+
 export interface UploadedLike {
   userName: string;
   userImg: string;
   userId: string;
 }
+
 export interface RetrievedPost extends UploadedPost {
   id: string;
   timestamp: Timestamp;
 }
+
 export interface RetrievedComment extends UploadedComment {
   id: string;
   timestamp: Timestamp;
 }
+
 export interface RetrievedLike {
   id: string;
   userName: string;

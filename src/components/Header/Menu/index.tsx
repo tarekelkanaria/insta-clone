@@ -5,16 +5,6 @@ import { AiFillHome } from "react-icons/ai";
 import AddPost from "./AddPost";
 import HeaderProfile from "./HeaderProfile";
 import HeaderSignin from "./HeaderSignin";
-import {
-  collection,
-  deleteDoc,
-  doc,
-  getDocs,
-  query,
-  setDoc,
-  where,
-} from "firebase/firestore";
-import { db } from "@/firebase";
 
 export default async function Menu() {
   const session = await getServerSession(authOptions);

@@ -1,3 +1,5 @@
+"use client";
+
 import useGenerateProfiles from "@/hooks/use-generate-stories";
 import Image from "next/image";
 import { ProfileSuggestion } from "@/types";
@@ -22,7 +24,7 @@ const SuggestionsList = () => {
             alt={profile.profileName}
             height={40}
             width={40}
-            style={{ width: "auto" }}
+            style={{ maxWidth: "40px", height: "auto" }}
             className="rounded-full border p-0.5 object-contain"
           />
           <div className="flex-1 ml-4">

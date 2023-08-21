@@ -1,5 +1,5 @@
-import { RetrievedLike } from "@/types";
 import { createSlice } from "@reduxjs/toolkit";
+import { RetrievedLike } from "@/types";
 
 type LikesModal = {
   isVisible: boolean;

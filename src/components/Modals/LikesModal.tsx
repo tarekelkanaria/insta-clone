@@ -38,7 +38,7 @@ const LikesModal = () => {
               alt={like.userName}
               width={28}
               height={28}
-              style={{ width: "auto" }}
+              style={{ maxWidth: "28px", height: "auto" }}
               className="p-0.5 rounded-full border border-red-500 object-cover"
             />
             <p className="font-bold text-sm">{like.userName}</p>

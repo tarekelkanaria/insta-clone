@@ -1,4 +1,12 @@
 import type { Timestamp } from "firebase/firestore";
+
+export interface User {
+  name: string;
+  email: string;
+  image: string;
+  username: string;
+  uid: string;
+}
 export interface ProfileStory {
   id: string;
   profileName: string;

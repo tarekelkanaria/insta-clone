@@ -42,7 +42,7 @@ const Posts = () => {
 
   return (
     <section className="mx-2 lg:mx-0 lg:col-span-2">
-      {initialLoading && (
+      {initialLoading && loadedPosts.length === 0 && (
         <>
           <PostsPlaceholders>
             <CommentsPlaceholders />

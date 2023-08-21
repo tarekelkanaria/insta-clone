@@ -1,25 +1,25 @@
-import { signOut } from "next-auth/react";
+"use client";
+
+import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 
-type Props = {
-  image: string;
-  username: string;
-};
-
-export default function MiniProfile({ image, username }: Props) {
+const MiniProfile = () => {
+  const { data: session } = useSession();
   return (
     <article className="flex items-center justify-between ml-5 mb-4">
       <Image
-        src={image}
-        alt={username}
+        src={session?.user.image as string}
+        alt={session?.user.username as string}
         height={64}
         width={64}
         priority={true}
-        style={{ width: "auto" }}
+        style={{ maxWidth: "64px", height: "auto" }}
         className="rounded-full border p-0.5 object-contain"
       />
       <div className="flex-1 ml-4">
-        <h2 className="font-bold whitespace-nowrap">{username}</h2>
+        <h2 className="font-bold whitespace-nowrap">
+          {session?.user.username}
+        </h2>
         <h3 className="text-sm text-gray-400 whitespace-nowrap">
           Welcome to Instagram
         </h3>
@@ -32,4 +32,6 @@ export default function MiniProfile({ image, username }: Props) {
       </button>
     </article>
   );
-}
+};
+
+export default MiniProfile;

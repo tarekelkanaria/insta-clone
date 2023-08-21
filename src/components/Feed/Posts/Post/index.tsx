@@ -18,6 +18,7 @@ type Props = {
 
 const Post = ({ children, id, userName, userImg, postImg, caption }: Props) => {
   const { data: session } = useSession();
+
   const [comment, setComment] = useState<string>("");
   const [hasLiked, setHasLiked] = useState<boolean>(false);
   const { retrievedData: likes } = useRetrieveData("likes", id) as {
@@ -44,7 +45,12 @@ const Post = ({ children, id, userName, userImg, postImg, caption }: Props) => {
     e.preventDefault();
     const enteredComment = comment;
     setComment("");
-    uploadComment({ id, userName, userImg, comment: enteredComment });
+    uploadComment({
+      id,
+      userName: session?.user.username as string,
+      userImg: session?.user.image as string,
+      comment: enteredComment,
+    });
   };
 
   const showLikes = () => {
@@ -61,7 +67,7 @@ const Post = ({ children, id, userName, userImg, postImg, caption }: Props) => {
           alt={userName}
           height={48}
           width={48}
-          style={{ width: "auto" }}
+          style={{ maxWidth: "48px", height: "auto" }}
           className="border rounded-full p-1 mr-3 object-cover"
         />
         <p className="font-bold flex-1">{userName}</p>
